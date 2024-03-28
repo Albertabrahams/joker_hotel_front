@@ -7,7 +7,7 @@ This is a simple booking system for Joker Hotel, built with React.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/MuratErtugral/joker_hotel.git
+   git clone https://github.com/Albertabrahams/joker_hotel_front.git
 
 2.Install dependecies
    ```bash
