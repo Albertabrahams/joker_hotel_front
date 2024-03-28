@@ -111,6 +111,13 @@ function Booking({ setBookingData, bookingData }) {
             </Slider>
             </div>
             {errors.selectedRooms && <p className="text-red-500">{errors.selectedRooms.message}</p>}
+
+            {selectedRooms.length > 0 && (
+                <p>
+                    Seçilen Odalar: {selectedRooms.sort((a, b) => a - b).join(', ')}
+                </p>
+            )}
+
             <div className="grid grid-cols-2 gap-4">
               <div className='flex flex-col'> <input type="text" className="border rounded-lg px-3 py-2 w-full" {...register('name')} placeholder="İsim" />
               {errors.name && <p className="text-red-500">{errors.name.message}</p>} </div>
