@@ -71,7 +71,8 @@ function Home({ setBookingData }) {
   return (
     <div className="flex justify-center items-center h-screen">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-lg p-8 space-y-4 w-80  z-10">
-        <label htmlFor="startDate" className="block text-gray-700">Başlangıç Tarihi</label>
+        <h1 class="text-center text-3xl text-blue-500 font-semibold">JOKER HOTELE HOŞGELDİNİZ</h1>
+        <label htmlFor="startDate" className="block text-blue-700 font-semibold">Başlangıç Tarihi</label>
         <input
           {...register('startDate')}
           type="date"
@@ -80,7 +81,7 @@ function Home({ setBookingData }) {
         />
         {errors.startDate && <p className="text-red-500">{errors.startDate.message}</p>}
 
-        <label htmlFor="endDate" className="block text-gray-700">Bitiş Tarihi</label>
+        <label htmlFor="endDate" className="block text-blue-700 font-semibold">Bitiş Tarihi</label>
         <input
           {...register('endDate')}
           type="date"
@@ -89,7 +90,7 @@ function Home({ setBookingData }) {
         />
         {errors.endDate && <p className="text-red-500">{errors.endDate.message}</p>}
 
-        <label htmlFor="personCount" className="block text-gray-700">Kişi Sayısı</label>
+        <label htmlFor="personCount" className="block text-blue-700 font-semibold">Kişi Sayısı</label>
         <input
           {...register('personCount')}
           type="number"

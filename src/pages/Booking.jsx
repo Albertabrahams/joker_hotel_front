@@ -94,6 +94,7 @@ function Booking({ setBookingData, bookingData }) {
     return (
       <div className="flex justify-center items-center min-h-screen " style={{backgroundImage: `url('/images/background.png')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="bg-white rounded-lg p-8 space-y-4 w-full md:w-2/3 lg:w-1/2">
+        <h1 className="text-center text-3xl text-blue-500 font-semibold">JOKER HOTELE HOŞGELDİNİZ</h1>
         <h1 class="text-center text-3xl text-blue-500 font-semibold">Rezervasyon Formu</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div >
