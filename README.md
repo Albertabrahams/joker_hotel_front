@@ -34,6 +34,7 @@ To run the application locally:
 - React Hook Form
 - Axios
 - Yup (for form validation)
+- Moment
 - Tailwind CSS
 
 ## Contributing

@@ -39,7 +39,7 @@ function Booking({ setBookingData, bookingData }) {
   const navigate = useNavigate();
     const onSubmit = async (data) => {
         try {
-          const response = await axios.post('https://hotel-backend-aed0e92deeca.herokuapp.com/bookings/booking/', {
+           await axios.post('https://hotel-backend-aed0e92deeca.herokuapp.com/bookings/booking/', {
             trin: data.trin, 
             name: data.name,
             surname: data.surname,

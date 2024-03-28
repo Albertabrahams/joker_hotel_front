@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const schema = yup.object().shape({
   personCount: yup
@@ -16,16 +17,27 @@ const schema = yup.object().shape({
   startDate: yup
     .date()
     .typeError('Lütfen geçerli bir tarih girin')
-    .min(new Date(), 'Başlangıç tarihi bugünden küçük olamaz')
+    .min(
+      new Date(new Date().setDate(new Date().getDate() - 1)),
+      'Başlangıç tarihi bugünden küçük olamaz'
+    )
     .max(yup.ref('endDate'), 'Başlangıç tarihi bitiş tarihinden büyük olamaz')
     .required('Bu alan zorunludur'),
-  endDate: yup
+    endDate: yup
     .date()
-    .typeError('Lütfen geçerli bir tarih girin')
-    .min(yup.ref('startDate'), 'Bitiş tarihi başlangıç tarihinden küçük olamaz')
-    .min(new Date(), 'Bitiş tarihi bugünden küçük olamaz')
-    .required('Bu alan zorunludur'),
+    .typeError("Lütfen geçerli bir tarih girin")
+    .min(yup.ref("startDate"), "Bitiş tarihi başlangıç tarihinden küçük olamaz")
+    .notOneOf(
+      [yup.ref("startDate")],
+      "Başlangıç tarihi ile bitiş tarihi aynı olamaz"
+    )
+    .test('not-equal', 'Bitiş tarihi başlangıç tarihine eşit olamaz', function(value) {
+        const startDate = this.resolve(yup.ref('startDate'));
+        return !startDate || !value || startDate.getTime() !== value.getTime();
+    })
+    .required("Bu alan zorunludur"),
 });
+
 
 function Home({ setBookingData }) {
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -36,11 +48,10 @@ function Home({ setBookingData }) {
 
   const onSubmit = async (data) => {
     try {
-      const formattedStartDate = new Date(data.startDate).toISOString().split('T')[0];
-      const formattedEndDate = new Date(data.endDate).toISOString().split('T')[0];
+      const formattedStartDate = moment(data.startDate).format('YYYY-MM-DD');
+      const formattedEndDate = moment(data.endDate).format('YYYY-MM-DD');
 
       const response = await axios.get(`https://hotel-backend-aed0e92deeca.herokuapp.com/rooms/Room/?start_date=${formattedStartDate}&end_date=${formattedEndDate}&attendees=${data.personCount}`);
-      console.log(response.data);
 
       setBookingData({
         startDate: formattedStartDate,
@@ -48,8 +59,6 @@ function Home({ setBookingData }) {
         personCount: data.personCount,
         rooms: response.data,
       });
-
-
       navigate('/booking');
     } catch (error) {
       console.error(error);
@@ -91,7 +100,7 @@ function Home({ setBookingData }) {
         {errors.personCount && <p className="text-red-500">{errors.personCount.message}</p>}
         <div className="flex justify-end ">
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg">
-          Gönder
+          Müsait Odaları Göster
         </button>
         </div>
       </form>

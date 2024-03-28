@@ -9,9 +9,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home bookingData={bookingData} setBookingData={setBookingData} />} />
+        <Route exact path="/" element={<Home setBookingData={setBookingData} />} />
         <Route path="/booking" element={<Booking  bookingData={bookingData} setBookingData={setBookingData}/>} />
-        <Route path="/result" element={<Result  bookingData={bookingData} setBookingData={setBookingData}/>} />
+        <Route path="/result" element={<Result  bookingData={bookingData}/>}/>
       </Routes>
     </Router>
   );
